@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     constructor(val = 0, left = null, right = null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+class Solution {
+    /**
+     * @param {TreeNode} root
+     * @return {boolean}
+     */
+    isBalanced(root: TreeNode | null): boolean {
+        if (!root) return true;
+        let val = this.getHeight(root);
+        return val !== -1;
+    }
+
+    getHeight(root: TreeNode | null): number {
+        if (!root) return 0;
+        let left = this.getHeight(root.left);
+        let right = this.getHeight(root.right);
+        if (left === -1 || right === -1) return -1;
+        return Math.abs(left - right) > 1 ? -1 : 1 + Math.max(left, right);
+    }
+}
